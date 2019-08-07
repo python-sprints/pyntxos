@@ -1,3 +1,11 @@
+"""
+Example of how to run:
+
+$ python geoviz -f data.json
+
+This will save an html.
+"""
+
 import folium
 import argparse
 import json
