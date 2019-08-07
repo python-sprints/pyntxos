@@ -41,3 +41,15 @@ The visualization should use the data computed by the other teams, and should ru
 - [GeoPandas](http://geopandas.org/)
 - [gmplot](https://github.com/vgm64/gmplot)
 - [Folium](https://github.com/python-visualization/folium)
+
+## Team 3 - Optimization
+
+**Goal**: Given a set of geolocations (latitude and longitude of restaurants), compute an optimal path among them. The cost function doesn't necessarily need to optimize for the shortest path, and can be constrained by the number of maximum restaurants, or include other information like the pricing, reviews... The optimization can also receive parameters, like the finishing point (the hotel where people will sleep after the pintxo routes), budget or any other.
+
+Feel free to use any technology you find useful, some ideas:
+
+- [scipy.optimise](https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html)
+- <https://cvxopt.org/>
+- <https://www.cvxpy.org/>
+- [PuLP](https://github.com/coin-or/pulp)
+- [Pyomo](http://www.pyomo.org/)
