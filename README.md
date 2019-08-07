@@ -63,3 +63,13 @@ Feel free to use any technology you find useful, and add to the dashboard anythi
 - [voila](https://github.com/QuantStack/voila)
 - [Panel](https://panel.pyviz.org/index.html)
 - [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/)
+
+## Team 5 - Continuous Integration
+
+**Goal**: Build a system that automatically fetches the data from the scrapping, the optimization, generates the dashboard, and publishes it online. The idea is that the online dashboard is re-generated with fresh data and features after each commit to master. The system can also validate for every pull request that everything is going to work as expected.
+
+Feel free to use any technology that is useful for the task, some ideas:
+
+- [Azure pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)
+- [Travis CI](https://travis-ci.org/)
+- [Binder](https://mybinder.org/)
