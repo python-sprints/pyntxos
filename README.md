@@ -1,5 +1,5 @@
 # pyntxos
-Visualization and optimization of pintxo routes at EuroSciPy 2019
+Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www.euroscipy.org/2019/)
 
 ## Team 1 - Scrapping
 
