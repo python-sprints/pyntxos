@@ -5,4 +5,4 @@ channels:
 dependencies:
   - python=3
   - folium
-  - nb_black=1.0.5=py_0
+  - nb_black
