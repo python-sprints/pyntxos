@@ -53,3 +53,13 @@ Feel free to use any technology you find useful, some ideas:
 - <https://www.cvxpy.org/>
 - [PuLP](https://github.com/coin-or/pulp)
 - [Pyomo](http://www.pyomo.org/)
+
+## Team 4 - Dashboarding
+
+**Goal**: Build an interactive dashboard with the components built by the other teams. Interactive widgets can be used, so the user can specify and adjust the parameters of interest, changing the map and any other component of the dashboard.
+
+Feel free to use any technology you find useful, and add to the dashboard anything you think adds value (images, widgets, text, tables...). Some ideas on the technologies to use:
+
+- [voila](https://github.com/QuantStack/voila)
+- [Panel](https://panel.pyviz.org/index.html)
+- [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/)
