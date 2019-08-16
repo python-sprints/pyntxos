@@ -4,8 +4,9 @@ cache: pip
 python:
     - "3.6"
 
-#install:
-#    - pip install jupyter
+install:
+  - pip --version
+  - pip install -r data_requirements.txt
 
 env:
   global:
@@ -18,6 +19,7 @@ env:
 script:
 #  - jupyter nbconvert probability/probability_questions.ipynb --to html
 #  - mv -f probability/probability_questions.html index.html
+  - python -c 'import data.utils; data.utils.scrape_data()'
   - git clone git://${GH_REPO}
   - mv -f ${FILES} ${REPO}
   - cd ${REPO}
