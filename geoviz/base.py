@@ -8,18 +8,13 @@ This will save an html.
 
 import folium
 import argparse
-import json
 
-def make_and_save_map(filename):
+
+def make_and_save_map(data):
 
     m = folium.Map(location=[43.2590929, -2.9244257], zoom_start=20)
 
     tooltip = "Click me!"
-
-
-    with open(filename, 'r') as file_:
-        data = json.load(file_)['data']
-
 
     for i in data:
         folium.Marker(

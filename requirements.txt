@@ -2,3 +2,4 @@ voila
 ipywidgets
 pandas
 geoviz
+folium
