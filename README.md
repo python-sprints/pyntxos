@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/python-sprints/pyntxos.svg?branch=master)](https://travis-ci.org/python-sprints/pyntxos)
 # pyntxos
 Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www.euroscipy.org/2019/)
 
