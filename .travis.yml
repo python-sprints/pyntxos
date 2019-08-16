@@ -1,0 +1,29 @@
+language: python
+cache: pip
+
+python:
+    - "3.6"
+
+#install:
+#    - pip install jupyter
+
+env:
+  global:
+  - ORG="python-sprints"
+  - EMAIL="joytolia@hotmail.com"
+  - REPO="pyntxos-dashboard"
+  - FILES="data.json requirements.txt Dashboard.ipynb Geovisualization.ipynb"
+  - GH_REPO="github.com/${ORG}/${REPO}.git"
+
+script:
+#  - jupyter nbconvert probability/probability_questions.ipynb --to html
+#  - mv -f probability/probability_questions.html index.html
+  - git clone git://${GH_REPO}
+  - mv -f ${FILES} ${REPO}
+  - cd ${REPO}
+  - git remote
+  - git config user.email ${EMAIL}
+  - git config user.name ${USER}
+  - git add ${FILES}
+  - git diff --quiet && git diff --staged --quiet || git commit -m "update data and dashboard"
+  - git push "https://${GITHUB_API_KEY}@${GH_REPO}" master
