@@ -74,3 +74,5 @@ Feel free to use any technology that is useful for the task, some ideas:
 - [Azure pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/)
 - [Travis CI](https://travis-ci.org/)
 - [Binder](https://mybinder.org/)
+
+Currently we have another [repository](https://github.com/python-sprints/pyntxos-dashboard) for data and dashboard. Every time something is pushed to the current repository, it will run `data.utils.scrape_data` in [Travis CI](https://travis-ci.org/) then push that new data and the dasboard to the second [repository](https://github.com/python-sprints/pyntxos-dashboard).
