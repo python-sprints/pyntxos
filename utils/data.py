@@ -1,15 +1,15 @@
 import os
 import json
 
-default_data_path = '.'
+default_data_path = './data'
 
-dummy_data = [
+dummy = [
     {'name': 'Argotia', 'latitude': 43.2590929, 'longitude': -2.9244257, 'address': 'Plaza Nueva, 48005 Bilbao, Vizcaya, Spain'},
     {'name': 'Sorginzulo', 'latitude': 43.259387, 'longitude': -2.9233905, 'address': 'Plaza Nueva, 12, 48005 Bilbao, BI, Spain'},
     ]
 
 
-def scrape_data(data_path=None):
+def scrape(data_path=None):
 
     if data_path is None:
         data_path = default_data_path
@@ -20,13 +20,13 @@ def scrape_data(data_path=None):
     data_file_path = os.path.join(data_path, 'data.json')
 
     # TODO Need to change the following to have real data
-    data = dummy_data
+    data = dummy
 
     with open(data_file_path, 'w') as file:
         json.dump(data, file)
 
 
-def get_data(data_path=None):
+def load(data_path=None):
 
     if data_path is None:
         data_path = default_data_path

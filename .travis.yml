@@ -12,13 +12,11 @@ env:
   - ORG="python-sprints"
   - EMAIL="joytolia@hotmail.com"
   - REPO="pyntxos-dashboard"
-  - FILES="data.json requirements.txt Dashboard.ipynb Geovisualization.ipynb"
+  - FILES="/data /utils environment.yml dashboard.ipynb"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
 
 script:
-#  - jupyter nbconvert probability/probability_questions.ipynb --to html
-#  - mv -f probability/probability_questions.html index.html
-  - python -c 'import data.utils; data.utils.scrape_data()'
+  - python -c 'import utils; utils.data.scrape()'
   - git clone git://${GH_REPO}
   - mv -f ${FILES} ${REPO}
   - cd ${REPO}

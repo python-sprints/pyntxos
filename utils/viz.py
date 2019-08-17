@@ -1,13 +1,4 @@
-"""
-Example of how to run:
-
->>> 
-
-This will save an html.
-"""
-
 import folium
-import argparse
 
 
 def make_and_save_map(data):
