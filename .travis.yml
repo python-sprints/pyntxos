@@ -5,7 +5,7 @@ python:
     - "3.7"
 
 install:
-  - pip install -r data_requirements.txt
+  - pip install -r scrape_data_requirements.txt
 
 env:
   global:
