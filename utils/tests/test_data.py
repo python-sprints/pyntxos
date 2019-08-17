@@ -1,12 +1,12 @@
 import os
-import utils
+import utils.data
 
 
 def test_scrape():
-    utils.data.scrape()
-    assert os.path.exists('./data/data.json')
+    utils.data.scrape(data_path='../../data/', dummy_flag=True)
+    assert os.path.exists('../../data/data.json')
 
 
 def test_load():
-    data = utils.data.load()
+    data = utils.data.load(data_path='../../data/data.json')
     assert data == utils.data.dummy

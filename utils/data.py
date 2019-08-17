@@ -9,7 +9,7 @@ dummy = [
     ]
 
 
-def scrape(data_path=None):
+def scrape(data_path=None, dummy_flag=False):
 
     if data_path is None:
         data_path = default_data_path
@@ -19,8 +19,11 @@ def scrape(data_path=None):
 
     data_file_path = os.path.join(data_path, 'data.json')
 
-    # TODO Need to change the following to have real data
-    data = dummy
+    if dummy_flag:
+        data = dummy
+    else:
+        # TODO Need to change the following to have real data
+        raise Exception('Not implemented.')
 
     with open(data_file_path, 'w') as file:
         json.dump(data, file)
