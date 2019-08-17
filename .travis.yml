@@ -12,7 +12,7 @@ env:
   - ORG="python-sprints"
   - EMAIL="joytolia@hotmail.com"
   - REPO="pyntxos-dashboard"
-  - FILES="/data /utils environment.yml dashboard.ipynb"
+  - FILES="./data ./utils environment.yml dashboard.ipynb"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
 
 script:
