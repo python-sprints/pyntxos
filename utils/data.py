@@ -23,7 +23,7 @@ def scrape(data_path=None, dummy_flag=False):
         data = dummy
     else:
         # TODO Need to change the following to have real data
-        raise Exception('Not implemented.')
+        data = dummy
 
     with open(data_file_path, 'w') as file:
         json.dump(data, file)

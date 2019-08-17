@@ -8,5 +8,5 @@ def test_scrape():
 
 
 def test_load():
-    data = utils.data.load(data_path='../../data/data.json')
+    data = utils.data.load(data_path='../../data/')
     assert data == utils.data.dummy
