@@ -18,9 +18,10 @@ env:
 script:
   - python -c 'import utils.data; utils.data.scrape()'
   - git clone git://${GH_REPO}
-  - mv ${COPY_DIR_FILE} ${REPO}
   - cd ${REPO}
   - rm -rf ${COPY_DIR_FILE}
+  - cd ..
+  - mv ${COPY_DIR_FILE} ${REPO}
   - git remote
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
