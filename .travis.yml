@@ -22,6 +22,7 @@ script:
   - rm -rf ${COPY_DIR_FILE}
   - cd ..
   - mv ${COPY_DIR_FILE} ${REPO}
+  - cd ${REPO}
   - git remote
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
