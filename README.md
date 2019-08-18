@@ -5,7 +5,7 @@ Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www
 
 ## Team 1 - Scrapping
 
-**Goal**: Generate a file `data/bilbao_restaurants.json` with the information of pintxo restaurants in Bilbao. The format could be:
+**Goal**: Generate a file `data/data.json` with the information of pintxo restaurants in Bilbao. The format could be:
 
 ```json
 [{"name": "Argotia",
