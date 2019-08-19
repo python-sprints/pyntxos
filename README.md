@@ -19,6 +19,13 @@ Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www
 ]
 ```
 
+### Instructions
+- You will need to `pip install -r scrape_data_requirements.txt` for this part
+
+### Issues
+- Uses `geopy` for get longitude and latitude data but does not have that information for all pintxos
+- Change `.travis.yml` so that it does not override the data but "updates" it
+
 Feel free to use any source of data you find, and any technology you find useful. Some suggestions:
 
 Data sources:
