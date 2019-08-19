@@ -8,8 +8,7 @@ data_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file_
 def test_scrape():
     data = utils.data.scrape(dummy_flag=True)
     assert data == utils.data.dummy
-
-    data = utils.data.scrape()
+    # data = utils.data.scrape()
 
 
 def test_dump():
