@@ -16,7 +16,7 @@ env:
   - GH_REPO="github.com/${ORG}/${REPO}.git"
 
 script:
-  - python -c 'import utils.data; utils.data.scrape()'
+  - python -c 'import utils.data; utils.data.dump(utils.data.scrape())'
   - git clone git://${GH_REPO}
   - cd ${REPO}
   - rm -rf ${COPY_DIR_FILE}
