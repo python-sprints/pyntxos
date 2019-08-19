@@ -56,7 +56,7 @@ def get_bilbao_turismo_restaurant_links():
 
     session = get_requests_session()
     r = session.get(pintxos_finder_link)
-    soup = BeautifulSoup(r.text)
+    soup = BeautifulSoup(r.text, features='html.parser')
 
     # Get all href with "=zona" for zones
     all_links = soup.select('a[href*=zona]')
@@ -77,7 +77,7 @@ def get_bilbao_turismo_restaurant_links():
         print(f'Working on page {page}: {page_link}')
 
         r = session.get(page_link)
-        soup = BeautifulSoup(r.text)
+        soup = BeautifulSoup(r.text, features='html.parser')
         # Get all the restaurant links by filtering on "/pintxo-finder/"
         single_page_restaurant_links = [
             get_bilbao_turismo_link(item.attrs["href"]) for item in soup.select('a[href*=\/pintxo-finder\/]')
@@ -95,7 +95,7 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
     for index, restaurant_link in enumerate(restaurant_links):
         print(f'Working on getting restaurant info {index}: {restaurant_link}')
         r = session.get(restaurant_link)
-        soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(r.text, features='html.parser')
 
         # Get relevant data
         name = soup.find('h2', itemprop='name')
