@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim, OpenMapQuest
 
-import utils.data
+# import utils.data
 
 bilbao_turismo_base_url = 'http://www.bilbaoturismo.net'
 max_bilbao_turismo_pintxo_finder_pages = 10
