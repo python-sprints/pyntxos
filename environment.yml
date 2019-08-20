@@ -7,3 +7,4 @@ dependencies:
   - folium
   - ipywidgets
   - voila
+  - jupyter
