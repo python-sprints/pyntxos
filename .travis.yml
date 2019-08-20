@@ -5,7 +5,7 @@ python:
     - "3.7"
 
 install:
-  - pip install -r scrape_data_requirements.txt
+  - pip install -r scrape_requirements.txt
 
 env:
   global:
@@ -16,7 +16,7 @@ env:
   - GH_REPO="github.com/${ORG}/${REPO}.git"
 
 script:
-  - python -c 'import utils.data; utils.data.dump(utils.data.scrape())'
+  - python -c 'import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape())'
   - git clone git://${GH_REPO}
   - cd ${REPO}
   - rm -rf ${COPY_DIR_FILE}
