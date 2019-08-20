@@ -1,3 +1,5 @@
+print('Do not import utils.scrape without running pip install -r scrape_requirements.')
+
 from functools import lru_cache
 
 import requests
