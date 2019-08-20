@@ -16,4 +16,4 @@ def test_dump():
 
 def test_load():
     data = utils.data.load(data_path=test_data_path)
-    assert data == utils.data.dummy
+    assert data == dummy_data
