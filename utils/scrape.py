@@ -4,7 +4,9 @@ from functools import lru_cache
 
 import requests
 from bs4 import BeautifulSoup
-from geopy.geocoders import Nominatim
+from geopy.geocoders import Nominatim, OpenMapQuest
+
+import utils.data
 
 bilbao_turismo_base_url = 'http://www.bilbaoturismo.net'
 max_bilbao_turismo_pintxo_finder_pages = 10
@@ -34,9 +36,9 @@ def get_requests_session():
 def get_bilbao_turismo_data():
     restaurant_links = get_bilbao_turismo_restaurant_links()
     data = get_bilbao_turismo_restaurant_infos(restaurant_links=restaurant_links)
-    # data = load()
+    # data = utils.data.load()
     data = get_longitude_latitude_info(data=data)
-    # dump(data)
+    # utils.data.dump(data)
     return data
 
 

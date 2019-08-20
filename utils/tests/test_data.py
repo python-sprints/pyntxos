@@ -1,7 +1,7 @@
 import os
 import utils.data
 
-test_data_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
+test_data_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'test_data')
 
 dummy_data = [
     {'name': 'Argotia', 'latitude': 43.2590929, 'longitude': -2.9244257, 'address': 'Plaza Nueva, 48005 Bilbao, Vizcaya, Spain'},
