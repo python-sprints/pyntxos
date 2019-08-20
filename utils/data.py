@@ -29,4 +29,6 @@ def load(data_path=None):
     with open(data_file_path, 'r') as file:
         data = json.load(file)
 
+    data = [item for item in data if 'longitude' in item.keys() and 'latitude' in item.keys()]
+
     return data
