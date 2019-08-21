@@ -20,7 +20,7 @@ Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www
 ```
 
 ### Instructions
-- You will need to `pip install -r scrape_data_requirements.txt` for this part
+- You will need to `pip install -r scrape_data_requirements.txt` for this part.
 
 ### Issues
 - Uses `geopy` for get longitude and latitude data but does not have that information for all pintxos
