@@ -15,8 +15,23 @@ def traverse_closest(start, destinations, N):
     dests = deepcopy(destinations)
     route = []
     current = start
-    for i in range(5):
+    for i in range(N):
         mini = np.argmin([distance(current, dest) for dest in dests])
         current = dests.pop(mini)
         route.append(current["name"])
     return route
+
+
+def traverse(start, end, destinations, N):
+    """From the pyntox location 'start' return a list of locations
+    defining a route to the location 'end' with N stops"""
+    dests = deepcopy(destinations)
+    route = [start]
+    current = start
+    for i in range(N):
+        dists = [distance(current, dest) for dest in dests]
+        end_dists = [distance(dest, end) for dest in dests]
+        min_ind = np.argmin([d + ed for d, ed in zip(dists, end_dists)])
+        current = dests.pop(min_ind)
+        route.append(current)
+    return route + [end]
