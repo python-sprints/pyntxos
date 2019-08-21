@@ -24,7 +24,9 @@ def traverse_closest(start, destinations, N):
 
 def traverse(start, end, destinations, N):
     """From the pyntox location 'start' return a list of locations
-    defining a route to the location 'end' with N stops"""
+    defining a route to the location 'end' with N stops, selected
+    from the list 'destinations',
+    """
     dests = deepcopy(destinations)
     route = [start]
     current = start
