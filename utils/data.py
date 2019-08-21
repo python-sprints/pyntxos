@@ -1,8 +1,8 @@
 import json
 import os
 
-default_data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
-default_file_name = 'data.json'
+default_data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+default_file_name = "data.json"
 
 
 def dump(data, data_path=None):
@@ -15,7 +15,7 @@ def dump(data, data_path=None):
 
     data_file_path = os.path.join(data_path, default_file_name)
 
-    with open(data_file_path, 'w') as file:
+    with open(data_file_path, "w") as file:
         json.dump(data, file)
 
 
@@ -26,9 +26,13 @@ def load(data_path=None):
 
     data_file_path = os.path.join(data_path, default_file_name)
 
-    with open(data_file_path, 'r') as file:
+    with open(data_file_path, "r") as file:
         data = json.load(file)
 
-    data = [item for item in data if 'longitude' in item.keys() and 'latitude' in item.keys()]
+    data = [
+        item
+        for item in data
+        if "longitude" in item.keys() and "latitude" in item.keys()
+    ]
 
     return data

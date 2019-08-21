@@ -1,4 +1,7 @@
+import pytest
+
 import utils.scrape
+import utils.viz
 
 
 def test_scrape():
