@@ -1,7 +1,7 @@
 import folium
 
 
-def make_and_save_map(data, num_restaurants=None):
+def make_and_save_map(data, num_restaurants=None, phone_number=False):
 
     m = folium.Map(location=[43.2590929, -2.9244257])  # , zoom_start=20)
 
@@ -18,10 +18,18 @@ def make_and_save_map(data, num_restaurants=None):
     if num_restaurants:
         data = data[:num_restaurants]
 
+    popup = "<i>{name}</i>\n{address}"
+    if phone_number:
+        popup += "\n+34 {number}"
+
     for i in data:
         folium.Marker(
             [i["latitude"], i["longitude"]],
-            popup=f"<i>{i['name']}</i>\n{i['address']}",
+            popup=popup.format(
+                name=i["name"],
+                address=i["address"],
+                number=i["telephone"].replace(" ", ""),
+            ),
             tooltip=tooltip,
         ).add_to(m)
 
