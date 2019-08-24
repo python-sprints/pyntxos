@@ -9,7 +9,7 @@ env:
     - EMAIL="joytolia@hotmail.com"
     - REPO="pyntxos-dashboard"
     - COPY_DIR_FILE="./data ./utils environment.yml requirements.txt dashboard.ipynb"
-    - GH_REPO="github.com/${ORG}/${REPO}.git"
+    - GH_REPO="git@github.com:${ORG}/${REPO}.git"
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_bcb8af953825_key -iv $encrypted_bcb8af953825_iv -in github_deploy_key.enc -out github_deploy_key -d
@@ -19,7 +19,7 @@ install:
 
 script:
   - python -c 'import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape())'
-  - git clone git://${GH_REPO}
+  - git clone ${GH_REPO}
   - cd ${REPO}
   - rm -rf ${COPY_DIR_FILE}
   - cd ..
@@ -30,5 +30,5 @@ script:
   - git config user.name ${USER}
   - git add ${COPY_DIR_FILE}
   - git diff --quiet && git diff --staged --quiet || git commit -m "update data and dashboard"
-  - git push "git://${GH_REPO}" master
+  - git push "${GH_REPO}" master
 
