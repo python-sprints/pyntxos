@@ -21,7 +21,7 @@ install:
   - pip install -r scrape_requirements.txt
 
 script:
-  #- python -c 'import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape())'
+  - python -c 'import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape())'
   - echo ${GH_REPO}
   - git clone ${GH_REPO}
   - cd ${REPO}
