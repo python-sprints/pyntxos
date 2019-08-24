@@ -5,6 +5,8 @@ python:
     - "3.7"
 
 before_install:
+  - pwd
+  - ls
   - >-
     openssl aes-256-cbc 
     -K $encrypted_bcb8af953825_key
