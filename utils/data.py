@@ -32,7 +32,7 @@ def load(data_path=None):
     data = [
         item
         for item in data
-        if "longitude" in item.keys() and "latitude" in item.keys()
+        if item['longitude'] is not None and item['latitude'] is not None
     ]
 
     return data

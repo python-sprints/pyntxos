@@ -17,12 +17,14 @@ dummy = [
         "latitude": 43.2590929,
         "longitude": -2.9244257,
         "address": "Plaza Nueva, 48005 Bilbao, Vizcaya, Spain",
+        "telephone": None,
     },
     {
         "name": "Sorginzulo",
         "latitude": 43.259387,
         "longitude": -2.9233905,
         "address": "Plaza Nueva, 12, 48005 Bilbao, BI, Spain",
+        "telephone": None,
     },
 ]
 
@@ -118,7 +120,20 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
 
         telephone = address.find("span", itemprop="telephone")
         if telephone is not None:
-            telephone = str(telephone.contents[0]).strip()
+            telephone = str(telephone.contents[0]).strip().replace(' ', '')
+
+        email = address.find("span", itemprop="email")
+        if email is not None:
+            email = str(email.contents[0]).strip()
+
+        try:
+            metro_stop = [
+                str(item.replace('Metro stop:', '')).strip()
+                for item in address.contents
+                if 'Metro stop:' in item
+            ][0]
+        except:
+            metro_stop = None
 
         address = dict(
             street_address=str(address.find("span", itemprop="streetAddress").contents[0]).strip(),
@@ -132,7 +147,9 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
             post_code=address["post_code"],
             town=address["town"],
             telephone=telephone,
+            email=email,
             address=f'{address["street_address"]} {address["post_code"]} {address["town"]}, Spain',
+            metro_stop=metro_stop,
             description=description,
         )
         data.append(restaurant_info)
@@ -157,6 +174,8 @@ def get_longitude_latitude_info(data):
             data[index]["longitude"] = location.longitude
             data[index]["latitude"] = location.latitude
         else:
+            data[index]["longitude"] = None
+            data[index]["latitude"] = None
             print(
                 f'{index} - Failure - {pintxo["name"]} - Getting Longitude and Latitude'
             )

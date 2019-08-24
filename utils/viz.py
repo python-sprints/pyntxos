@@ -28,7 +28,7 @@ def make_and_save_map(data, num_restaurants=None, phone_number=False):
             popup=popup.format(
                 name=i["name"],
                 address=i["address"],
-                number=i["telephone"].replace(" ", ""),
+                number=i["telephone"],
             ),
             tooltip=tooltip,
         ).add_to(m)
