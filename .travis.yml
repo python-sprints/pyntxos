@@ -15,6 +15,10 @@ env:
   - COPY_DIR_FILE="./data ./utils environment.yml requirements.txt dashboard.ipynb"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_bcb8af953825_key -iv $encrypted_bcb8af953825_iv -in github_deploy_key.enc -out github_deploy_key -d
+
+
 script:
   - python -c 'import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape())'
   - git clone git://${GH_REPO}
@@ -28,4 +32,4 @@ script:
   - git config user.name ${USER}
   - git add ${COPY_DIR_FILE}
   - git diff --quiet && git diff --staged --quiet || git commit -m "update data and dashboard"
-  - git push "https://${GITHUB_API_KEY}@${GH_REPO}" master
+  - git push "git://${GH_REPO}" master
