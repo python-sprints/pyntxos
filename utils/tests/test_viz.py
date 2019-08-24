@@ -1,6 +1,7 @@
 import pytest
 
-import utils
+import utils.viz
+import utils.scrape
 
 
 @pytest.mark.parametrize("num_restaurants", [(1), (2)])
