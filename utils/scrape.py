@@ -113,23 +113,17 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
         address = soup.find("span", itemprop="address")
 
         # Massage the data
-        name = " ".join(
-            [item.capitalize() for item in name.contents[0].split(" ")]
-        ).strip()
+        name = " ".join([item.capitalize() for item in name.contents[0].split(" ")]).strip()
         description = str(description.contents[0].contents[0]).strip()
+
+        telephone = address.find("span", itemprop="telephone")
+        if telephone is not None:
+            telephone = str(telephone.contents[0]).strip()
+
         address = dict(
-            street_address=str(
-                address.find("span", itemprop="streetAddress").contents[0]
-            ).strip(),
-            post_code=str(
-                address.find("span", itemprop="postalCode").contents[0]
-            ).strip(),
-            town=str(
-                address.find("span", itemprop="addressLocality").contents[0]
-            ).strip(),
-            telephone=str(
-                address.find("span", itemprop="telephone").contents[0]
-            ).strip(),
+            street_address=str(address.find("span", itemprop="streetAddress").contents[0]).strip(),
+            post_code=str(address.find("span", itemprop="postalCode").contents[0]).strip(),
+            town=str(address.find("span", itemprop="addressLocality").contents[0]).strip(),
         )
 
         restaurant_info = dict(
@@ -137,7 +131,7 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
             street_address=address["street_address"],
             post_code=address["post_code"],
             town=address["town"],
-            telephone=address["telephone"],
+            telephone=telephone,
             address=f'{address["street_address"]} {address["post_code"]} {address["town"]}, Spain',
             description=description,
         )
