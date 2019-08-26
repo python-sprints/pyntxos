@@ -29,13 +29,12 @@ dummy = [
 ]
 
 
-def scrape(dummy_flag=False):
+def scrape(dummy_flag=False, api_key=None):
 
     if dummy_flag:
         data = dummy
     else:
-        # TODO Need to change the following to have real data
-        data = get_bilbao_turismo_data()
+        data = get_bilbao_turismo_data(api_key=api_key)
 
     return data
 
@@ -45,12 +44,10 @@ def get_requests_session():
     return requests.session()
 
 
-def get_bilbao_turismo_data():
+def get_bilbao_turismo_data(api_key=None):
     restaurant_links = get_bilbao_turismo_restaurant_links()
     data = get_bilbao_turismo_restaurant_infos(restaurant_links=restaurant_links)
-    # data = utils.data.load()
-    data = get_longitude_latitude_info(data=data)
-    # utils.data.dump(data)
+    data = get_longitude_latitude_info(data=data, api_key=api_key)
     return data
 
 
@@ -156,13 +153,17 @@ def get_bilbao_turismo_restaurant_infos(restaurant_links):
     return data
 
 
-def get_longitude_latitude_info(data):
-    geolocator = Nominatim(user_agent="pyntxos")
+def get_longitude_latitude_info(data, api_key=None):
+
+    if api_key is None:
+        geolocator = Nominatim(user_agent='pyntxos')
+    else:
+        geolocator = OpenMapQuest(user_agent='pyntxos', api_key=api_key)
+
     failure_count = 0
     for index, pintxo in enumerate(data):
-        location = geolocator.geocode(
-            f'{pintxo["name"]}, {pintxo["post_code"]}, Bilbao, Spain'
-        )
+        location = geolocator.geocode(f'{pintxo["name"]}, {pintxo["post_code"]}, Bilbao, Spain')
+
         if location is None:
             location = geolocator.geocode(pintxo["address"])
 
@@ -182,6 +183,6 @@ def get_longitude_latitude_info(data):
             failure_count += 1
 
     print(
-        f"{failure_count / len(data) * 100:.0f}% failed for getting longitude and latitude."
+        f'{failure_count / len(data) * 100:.0f}% failed for getting longitude and latitude.'
     )
     return data
