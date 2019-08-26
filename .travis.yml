@@ -8,7 +8,7 @@ env:
     - ORG="python-sprints"
     - EMAIL="joytolia@hotmail.com"
     - REPO="pyntxos-dashboard"
-    - COPY_DIR_FILE="./data ./utils environment.yml requirements.txt dashboard.ipynb"
+    - COPY_DIR_FILE="./data ./utils requirements.txt dashboard.ipynb"
     - GH_REPO="git@github.com:${ORG}/${REPO}.git"
 
 before_install:
