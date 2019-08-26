@@ -1,5 +1,62 @@
 from copy import deepcopy
+import pandas as pd
 import numpy as np
+
+
+def get_distance(start, end, measure=None):
+    return np.linalg.norm([start['longitude'] - end['longitude'], start['latitude'] - end['latitude']], ord=measure)
+
+
+def get_df(data, distance_measure=None):
+    df = pd.DataFrame(data)
+    df['location'] = [
+        pd.Series(item)
+        for item in df[['longitude', 'latitude']].apply(lambda row: row.to_dict(), axis=1).to_list()
+    ]
+
+    return df
+
+
+def get_straight_line(start, end, n_stops):
+    longitude_line = np.linspace(start=start['longitude'], stop=end['longitude'], num=n_stops)
+    latitude_line = np.linspace(start=start['latitude'], stop=end['latitude'], num=n_stops)
+    straight_line = pd.DataFrame({'location': [
+        pd.Series({'longitude': item[0], 'latitude': item[1]})
+        for item in zip(longitude_line, latitude_line)
+    ]})
+    return straight_line
+
+
+def get_shortest_path(df, start, end, n_stops, distance_measure=None):
+
+    if isinstance(start, str):
+        start = df.index[df['name'] == start][0]
+
+    if isinstance(end, str):
+        end = df.index[df['name'] == end][0]
+
+    if isinstance(distance_measure, str):
+        distance_measure_dict = {'Euclidean': 2, 'Manhattan': 1, 'Infinity': np.inf}
+        distance_measure = distance_measure_dict.get(distance_measure, distance_measure_dict['Euclidean'])
+
+    straight_line_df = get_straight_line(start=df.loc[start], end=df.loc[end], n_stops=n_stops)
+
+    distance_df = pd.DataFrame(0, index=df.index, columns=straight_line_df.index)
+    for index_1, value_1 in df['location'].iteritems():
+        for index_2, value_2 in straight_line_df['location'].iteritems():
+            distance_df.loc[index_1, index_2] = get_distance(start=value_1, end=value_2, measure=distance_measure)
+
+    closest_nodes_df = pd.DataFrame(np.argsort(distance_df, axis=0), index=distance_df.index, columns=distance_df.columns)
+    route = {0: start}
+    taken_nodes = {start, end}
+    for index, nodes in closest_nodes_df[np.arange(1, n_stops-1)].iteritems():
+        route[index] = nodes.loc[~nodes.isin(taken_nodes)].sort_index().iloc[0]
+        taken_nodes.add(route[index])
+    route[n_stops-1] = end
+
+    route = pd.Series(route).sort_index().tolist()
+
+    return route
 
 
 def distance(start, end):
