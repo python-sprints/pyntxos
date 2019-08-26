@@ -1,52 +1,42 @@
 import folium
 
 
-def make_and_save_map(data, num_restaurants=None, phone_number=False):
+def get_map(data, route=None):
+
+    if route is None:
+        route = data
 
     m = folium.Map(location=[43.2590929, -2.9244257])  # , zoom_start=20)
 
-    tooltip = "Click me!"
+    for index, item in enumerate(data):
 
-    if num_restaurants:
-        if not isinstance(num_restaurants, int):
-            raise ValueError("`num_restaurants` must be integer or None!")
+        if index in route:
+            tooltip = f'{route.index(index)+1}-{item["name"]}'
+            icon = folium.features.Icon(color='red')
+        else:
+            tooltip = item['name']
+            icon = None
 
-    if isinstance(num_restaurants, int):
-        if num_restaurants < 1:
-            raise ValueError("`num_restaurants` must be at least 1!")
-
-    if num_restaurants:
-        data = data[:num_restaurants]
-
-    popup = "<i>{name}</i>\n{address}"
-    if phone_number:
-        popup += "\n+34 {number}"
-
-    for i in data:
-        folium.Marker(
-            [i["latitude"], i["longitude"]],
-            popup=popup.format(
-                name=i["name"],
-                address=i["address"],
-                number=i["telephone"],
-            ),
+        folium.features.Marker(
+            [item['latitude'], item['longitude']],
+            popup=f'<b>{item["name"]}</b><br>{item["address"]}<br>+34 {item["telephone"]}',
             tooltip=tooltip,
+            icon=icon,
         ).add_to(m)
 
-    for n in range(len(data) - 1):
-        folium.ColorLine(
-            [
-                (data[n]["latitude"], data[n]["longitude"]),
-                (data[n + 1]["latitude"], data[n + 1]["longitude"]),
-            ],
-            [1],
-            weight=3,
-            colormap=["green", "red"],
-        ).add_to(m)
+    line = [[data[item]['latitude'], data[item]['longitude']] for item in route]
+
+    folium.features.ColorLine(
+        line,
+        colors=list(range(len(line)-1)),
+        weight=5,
+    ).add_to(m)
+
+    lat_long = list(map(list, zip(*line)))
     m.fit_bounds(
         [
-            [min([i["latitude"] for i in data]), min([i["longitude"] for i in data])],
-            [max([i["latitude"] for i in data]), max([i["longitude"] for i in data])],
+            [min(lat_long[0]), min(lat_long[1])],
+            [max(lat_long[0]), max(lat_long[1])],
         ]
     )
 

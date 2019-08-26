@@ -2,3 +2,5 @@ ipywidgets
 folium
 voila
 jupyter
+pandas
+numpy
