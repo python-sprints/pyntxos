@@ -9,14 +9,18 @@ def get_map(data, route=None):
     m = folium.Map(location=[43.2590929, -2.9244257])  # , zoom_start=20)
 
     for index, item in enumerate(data):
-        icon = None
+
         if index in route:
+            tooltip = f'{route.index(index)+1}-{item["name"]}'
             icon = folium.features.Icon(color='red')
+        else:
+            tooltip = item['name']
+            icon = None
 
         folium.features.Marker(
             [item['latitude'], item['longitude']],
             popup=f'<b>{item["name"]}</b><br>{item["address"]}<br>+34 {item["telephone"]}',
-            tooltip=item['name'],
+            tooltip=tooltip,
             icon=icon,
         ).add_to(m)
 
