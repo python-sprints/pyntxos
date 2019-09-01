@@ -73,7 +73,8 @@ def test_get_straight_line(dummy_data):
 
 def test_get_shortest_path(df):
     n_stops = 10
-    route = utils.opt.get_shortest_path(df, start=0, end=1, n_stops=n_stops)
+    # route = utils.opt.get_shortest_path(df, start=0, end=1, n_stops=n_stops)
+    route = utils.opt.get_shortest_path(df, start='Urkia Taberna', end='Gure Toki', n_stops=n_stops, distance_measure='Manhattan')
     assert len(set(route)) == n_stops
 
 

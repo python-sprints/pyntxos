@@ -1,6 +1,7 @@
 from copy import deepcopy
 import pandas as pd
 import numpy as np
+# import mlrose
 
 
 def get_distance(start, end, measure=None):
@@ -77,6 +78,25 @@ def get_shortest_path(df, start, end, n_stops, distance_measure=None):
         distance_measure=distance_measure,
     )
 
+    # inverse_route = {value: key for key, value in route.items()}
+    #
+    # tsp_series = (distance_df
+    #     .loc[route.values(), route.values()]
+    #     .rename(columns=inverse_route, index=inverse_route)
+    #     .stack()
+    #     )
+    # tsp_series = tsp_series.loc[tsp_series != 0] * 1_000_000
+    # tsp_series.loc[(inverse_route[end], inverse_route[start])] = 0.0001
+    # tsp_series.loc[(inverse_route[start], inverse_route[end])] = 0.0001
+    # tsp_dist_list = zip(tsp_series.index.get_level_values(0), tsp_series.index.get_level_values(1), tsp_series.values)
+    # fitness_dist = mlrose.TravellingSales(distances=tsp_dist_list)
+    # problem_fit = mlrose.TSPOpt(length=n_stops, fitness_fn=fitness_dist, maximize=False)
+    # best_route, best_fitness = mlrose.genetic_alg(problem_fit, mutation_prob=0.2, max_attempts=100, random_state=2)
+    # best_route = np.roll(best_route, -np.argwhere(best_route == inverse_route[start])[0])
+    # if best_route[1] == inverse_route[end]:
+    #     best_route = np.roll(best_route[::-1], 1)
+    # route = [route[item] for item in best_route]
+
     index_to_adjust = range(1, n_stops - 1)
     left_nodes = set([route[item] for item in index_to_adjust])
     for index in index_to_adjust:
@@ -84,7 +104,6 @@ def get_shortest_path(df, start, end, n_stops, distance_measure=None):
         closest_nodes = closest_nodes_df[previous]
         route[index] = closest_nodes.loc[closest_nodes.isin(left_nodes)].sort_index().iloc[0]
         left_nodes.remove(route[index])
-
     route = pd.Series(route).sort_index().tolist()
 
     return route
