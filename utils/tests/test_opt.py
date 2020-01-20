@@ -77,5 +77,15 @@ def test_get_shortest_path(df):
     route = utils.opt.get_shortest_path(df, start='Urkia Taberna', end='Gure Toki', n_stops=n_stops, distance_measure='Manhattan')
     assert len(set(route)) == n_stops
 
-
+def test_get_constraint_programming(df):
+    n_stops = 10
+    # route = utils.opt.get_shortest_path(df, start=0, end=1, n_stops=n_stops)
+    route = utils.opt.constraint_programming(
+        df,
+        start="Urkia Taberna",
+        end="Gure Toki",
+        n_stops=n_stops,
+        distance_measure="Manhattan",
+    )
+    assert len(set(route)) == n_stops
 

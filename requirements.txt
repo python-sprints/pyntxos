@@ -4,3 +4,5 @@ voila
 jupyter
 pandas
 numpy
+ortools
+scipy
