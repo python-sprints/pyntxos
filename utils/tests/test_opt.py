@@ -1,43 +1,8 @@
 import pytest
-import numpy as np
 import pandas as pd
-import networkx as nx
 
 import utils.data
 import utils.opt
-
-
-@pytest.mark.parametrize('input, expected_distance', [
-    [dict(start={'longitude': 0, 'latitude': 0}, end={'longitude': 0, 'latitude': 0}), 0],
-    [dict(start={'longitude': 1, 'latitude': 0}, end={'longitude': 0, 'latitude': 1}), np.sqrt(2)],
-    [dict(start={'longitude': 1, 'latitude': 0}, end={'longitude': 0, 'latitude': 1}, measure=1), 2],
-    [dict(start={'longitude': 1, 'latitude': 0}, end={'longitude': 0, 'latitude': 1}, measure=np.inf), 1],
-])
-def test_get_distance(input, expected_distance):
-    distance = utils.opt.get_distance(**input)
-    assert distance == expected_distance
-
-
-
-@pytest.fixture()
-def dummy_data():
-    data = [
-        {
-            "name": "Argotia",
-            "latitude": 43.2590929,
-            "longitude": -2.9244257,
-            "address": "Plaza Nueva, 48005 Bilbao, Vizcaya, Spain",
-            "telephone": None,
-        },
-        {
-            "name": "Sorginzulo",
-            "latitude": 43.259387,
-            "longitude": -2.9233905,
-            "address": "Plaza Nueva, 12, 48005 Bilbao, BI, Spain",
-            "telephone": None,
-        },
-    ]
-    return data
 
 
 @pytest.fixture()
@@ -55,37 +20,24 @@ def df(data):
     return utils.opt.get_df(data)
 
 
-def test_get_straight_line(dummy_data):
-    data = dummy_data
-    start = data[0]
-    end = data[1]
-    n_stops = 10
-
-    line_df = utils.opt.get_straight_line(start=start, end=end, n_stops=n_stops)
-
-    start_line = line_df['location'].iloc[0]
-    end_line = line_df['location'].iloc[-1]
-
-    assert len(line_df) == n_stops
-    assert start_line['longitude'] == start['longitude'] and start_line['latitude'] == start['latitude']
-    assert end_line['longitude'] == end['longitude'] and end_line['latitude'] == end['latitude']
-
-
-def test_get_shortest_path(df):
-    n_stops = 10
-    # route = utils.opt.get_shortest_path(df, start=0, end=1, n_stops=n_stops)
-    route = utils.opt.get_shortest_path(df, start='Urkia Taberna', end='Gure Toki', n_stops=n_stops, distance_measure='Manhattan')
-    assert len(set(route)) == n_stops
-
-def test_get_constraint_programming(df):
-    n_stops = 10
-    # route = utils.opt.get_shortest_path(df, start=0, end=1, n_stops=n_stops)
+@pytest.mark.parametrize('start, end, n_stops, distance_measure', [
+    ('Urkia Taberna', 'Gure Toki', 10, 'Manhattan'),
+    ('Urkia Taberna', 'Gure Toki', 2, 'Manhattan'),
+    ('Urkia Taberna', 'Gure Toki', 40, 'Manhattan'),
+    ('Urkia Taberna', 'Gure Toki', 10, 'Euclidean'),
+    ('Urkia Taberna', 'Gure Toki', 10, 'Infinity'),
+    ('Urkia Taberna', 'Gure Toki', 10, 1.75),
+    ('Gure Toki', 'Urkia Taberna', 10, 'Manhattan'),
+    ('Motrikes', 'Gure Toki', 10, 'Manhattan'),
+    ('Urkia Taberna', 'Zuga', 10, 'Manhattan'),
+    ('Motrikes', 'Zuga', 10, 'Manhattan'),
+])
+def test_get_constraint_programming(df, start, end, n_stops, distance_measure):
     route = utils.opt.constraint_programming(
-        df,
-        start="Urkia Taberna",
-        end="Gure Toki",
+        df[['longitude', 'latitude']],
+        start=df.index[df['name'] == start][0],
+        end=df.index[df['name'] == end][0],
         n_stops=n_stops,
-        distance_measure="Manhattan",
+        distance_measure=distance_measure,
     )
     assert len(set(route)) == n_stops
-
