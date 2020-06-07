@@ -1,4 +1,5 @@
 ![Test](https://github.com/python-sprints/pyntxos/workflows/Test/badge.svg)
+![Scrape + Update](https://github.com/python-sprints/pyntxos/workflows/Scrape%20+%20Update/badge.svg)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/python-sprints/pyntxos-dashboard/master?urlpath=voila%2Frender%2Fdashboard.ipynb)
 # pyntxos
 Visualization and optimization of pintxo routes for [EuroSciPy 2019](https://www.euroscipy.org/2019/)
