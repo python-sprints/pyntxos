@@ -96,8 +96,8 @@ def get_bilbao_turismo_restaurant_links():
         soup = BeautifulSoup(r.text, features="html.parser")
         # Get all the restaurant links by filtering on "/pintxo-finder/"
         single_page_restaurant_links = [
-            get_bilbao_turismo_link(item.attrs["href"])
-            for item in soup.select("a[href*=\/pintxo-finder\/]")
+            get_bilbao_turismo_link(item.attrs['href'])
+            for item in soup.select(r'a[href*=\/pintxo-finder\/]')
         ]
         restaurant_links += single_page_restaurant_links
 
