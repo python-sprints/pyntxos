@@ -12,7 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
     
-     # Which python to run on?
     strategy:
       matrix:
         python-version: [3.8]
@@ -33,9 +32,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r scrape_requirements.txt
         
-#     - name: Scrape data
-#       run: |
-#         python -c "import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape(api_key='${{ secrets.OPEN_MAP_QUEST_API_KEY }}'))"
+    - name: Scrape data
+      run: |
+        python -c "import utils.scrape; import utils.data; utils.data.dump(utils.scrape.scrape(api_key='${{ secrets.OPEN_MAP_QUEST_API_KEY }}'))"
         
     - name: Checkout dashboard repository
       uses: actions/checkout@v2
@@ -56,7 +55,7 @@ jobs:
     # 1) Run "ssh-keygen -t rsa -b 4096" and store into a temporary key file
     # 2) Copy the public key and store into the target (pages) repository "Settings" -> "Deploy Keys"
     # 3) Copy the private key and store into secrets of this repository as "SSH_PRIVATE_KEY"
-    # 4) Copy the public key and prepend with "github.com " and add into secrets of this repository as "KNOWN_HOSTS"
+    # 4) Add " " (blank space) into secrets of this repository as "KNOWN_HOSTS"
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
