@@ -70,6 +70,6 @@ jobs:
         git remote add github_actions_ssh git@github.com:${{ matrix.target_repository }}.git
         git config user.email $GITHUB_ACTOR
         git config user.name $GITHUB_ACTOR
-        git add .
-        git diff --quiet && git diff --staged --quiet || git commit -m "update ${{ matrix.target_repository }} ${{ matrix.add_files }}"
+        git add ${{ matrix.add_folders_files }}
+        git diff --quiet && git diff --staged --quiet || git commit -m "update ${{ matrix.target_repository }} ${{ matrix.add_folders_files }}"
         git push -u github_actions_ssh master
