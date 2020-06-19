@@ -21,7 +21,7 @@ Visualization and optimization of pintxo routes, initially developed for [EuroSc
 ```
 
 ### Instructions
-- You will need to `pip install -r scrape_data_requirements.txt` for this part.
+- You need to install the dependencies with `pip install -r scrape_data_requirements.txt` for this part.
 
 ### Issues
 - Uses `geopy` for get longitude and latitude data but does not have that information for all pintxos
